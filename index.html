@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./formeo/dist/formeo.min.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class ="formeo-wrap">
+    </div>
+    <style>
+        .formeo-wrap {
+            height: 500px; /* Ajusta la altura como sea necesario */
+            border: 1px solid #ccc; /* Para ver los límites del contenedor */
+            padding: 10px; /* Espaciado interno */
+        }
+    </style>
+
+    <script src="./formeo/dist/demo/assets/js/formeo.min.js"></script>
+    <script>
+            const controls = {
+                sortable: false,
+                groupOrder: ['common', 'html'],
+                disable: {
+                    elements: ['button'],
+                    },
+                elements: [
+            {
+                tag: 'input',
+                config: {
+                    label: 'Email',
+                    disabledAttrs: ['type'],
+                    lockedAttrs: ['required', 'className'],
+                },
+            meta: {
+                group: 'common',
+                id: 'email',
+                icon: '@',
+            },
+            attrs: {
+                className: 'custom-email',
+                type: 'email',
+                required: true,
+            },
+        },
+    // Otros elementos pueden definirse aquí
+    ],
+    elementOrder: {
+        common: ['button', 'checkbox', 'date-input', 'number', 'radio', 'select', 'text-input', 'textarea'],
+    },
+};
+
+            const options = {
+            editorContainer: document.querySelector('.formeo-wrap'),
+            // svgSprite: './formeo/dist/assets/demo/img/formeo-sprite.svg', // Ruta del sprite SVG
+            controls,
+            debug: true,
+            onSave: function () {
+                const formData = editor.formData;
+                console.log('Datos del formulario guardados:', formData);
+            }
+        }
+
+        const editor = new FormeoEditor(options);
+        const formData = editor.formData;
+        const renderer = new FormeoRenderer(formData)
+        
+    </script>
+</body>
+</html>
